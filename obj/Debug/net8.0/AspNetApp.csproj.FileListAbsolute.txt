@@ -26,3 +26,4 @@ D:\Kloshar\programming\AspNetApp\obj\Debug\net8.0\refint\AspNetApp.dll
 D:\Kloshar\programming\AspNetApp\obj\Debug\net8.0\AspNetApp.pdb
 D:\Kloshar\programming\AspNetApp\obj\Debug\net8.0\AspNetApp.genruntimeconfig.cache
 D:\Kloshar\programming\AspNetApp\obj\Debug\net8.0\ref\AspNetApp.dll
+D:\Kloshar\programming\AspNetApp\obj\Debug\net8.0\AspNetApp.sourcelink.json
