@@ -1,15 +1,38 @@
-WebApplicationBuilder builder = WebApplication.CreateBuilder(args); //ñòàòè÷åñêèé ìåòîä ñîçäà¸ò îáúåêò WebApplicationBuilder
-WebApplication app = builder.Build(); //ñîçäà¸ì îáúåêò WebApplication
+ï»¿using System.Text;
 
-app.MapGet("/", () => "Hello World!");
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args); //ÑÑ‚Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ð¹ Ð¼ÐµÑ‚Ð¾Ð´ ÑÐ¾Ð·Ð´Ð°Ñ‘Ñ‚ Ð¾Ð±ÑŠÐµÐºÑ‚ WebApplicationBuilder
+WebApplication app = builder.Build(); //ÑÐ¾Ð·Ð´Ð°Ñ‘Ð¼ Ð¾Ð±ÑŠÐµÐºÑ‚ WebApplication
+//app.MapGet("/", () => "Hello World!");
 
 //app.Run(async (context) => await context.Response.WriteAsync("Hello from response!"));
+int x = 1;
 
-app.Run(foo);
-
+app.Run(foo); //Ð·Ð°Ð¿ÑƒÑÐºÐ°ÐµÐ¼ Ð¼ÐµÑ‚Ð¾Ð´ foo
 app.Run();
 
- async Task foo(HttpContext context)
+async Task foo(HttpContext context)
 {
-    await context.Response.WriteAsync("Hello from response!");
+    var response = context.Response;
+    response.OnStarting(()=> {
+        response.Headers.ContentLanguage = "ru-Ru";
+        response.ContentType = "text/html; charset=utf-8";
+        return Task.CompletedTask;
+    });
+
+    StringBuilder sb = new StringBuilder("<table>");
+
+    foreach(var header in context.Request.Headers)
+    {
+        sb.Append($"<tr><td>{header.Key}</td><td>{header.Value}</td></tr>");
+    }
+    sb.Append("</table>");
+    
+
+    await context.Response.WriteAsync(sb.ToString());
+
+
+
+
 }
+
+
