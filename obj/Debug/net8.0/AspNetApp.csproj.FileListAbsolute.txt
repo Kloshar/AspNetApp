@@ -57,3 +57,4 @@ E:\Programming\AspNetApp\obj\Debug\net8.0\AspNetApp.pdb
 E:\Programming\AspNetApp\obj\Debug\net8.0\AspNetApp.genruntimeconfig.cache
 E:\Programming\AspNetApp\obj\Debug\net8.0\ref\AspNetApp.dll
 E:\Programming\AspNetApp\bin\Debug\net8.0\5_этажка.JPG
+D:\Kloshar\programming\AspNetApp\bin\Debug\net8.0\5_этажка.JPG

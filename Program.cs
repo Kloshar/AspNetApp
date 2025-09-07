@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.FileProviders;
-using Microsoft.Extensions.FileProviders.Physical;
+using System;
+using System.IO;
 using System.Text;
 //#nullable disable
 
@@ -8,10 +9,28 @@ WebApplication app = builder.Build(); //создаём объект WebApplicati
 //app.MapGet("/", () => "Hello World!");
 
 //app.Run(async (context) => await context.Response.WriteAsync("Hello from response!"));
-
 //app.Run(foo); //запускаем метод foo
+//app.Run(saveAttachment);
 
-app.Run(async (context) =>
+app.Run(sendForm);
+
+app.Run();
+
+async Task sendForm(HttpContext context)
+{
+    var response = context.Response;
+
+    if(context.Request.Path == "/postuser")
+    {
+        var form = context.Request.Form;
+        string name = form["name"];
+        string age = form["age"];
+        await response.WriteAsync($"<div><p>Name: {name}</p><p>Age: {age}</p></div>");
+    }
+    else await response.SendFileAsync("html / index.html");
+}
+
+async Task saveAttachment(HttpContext context)
 {
     var path = context.Request.Path;
     var fullPath = $"html/{path}";
@@ -19,7 +38,7 @@ app.Run(async (context) =>
 
     response.OnStarting(() =>
     {
-        response.Headers.ContentLanguage = "ru-Ru"; 
+        response.Headers.ContentLanguage = "ru-Ru";
         response.ContentType = "text/html; charset=utf-8";
         return Task.CompletedTask;
     });
@@ -38,11 +57,8 @@ app.Run(async (context) =>
 
         response.Headers.ContentDisposition = "attachment; filename=my_forest.jpg";
         await response.SendFileAsync(fileInfo);
-    }   
-});
-
-app.Run();
-
+    }
+}
 async Task foo(HttpContext context)
 {
     var response = context.Response;
