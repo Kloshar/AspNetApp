@@ -12,7 +12,7 @@ WebApplication app = builder.Build(); //создаём объект WebApplicati
 //app.Run(foo); //запускаем метод foo
 //app.Run(saveAttachment);
 
-app.Run(sendForm);
+app.Run(sendForm); //отправка формы
 
 app.Run();
 
