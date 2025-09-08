@@ -14,8 +14,6 @@ WebApplication app = builder.Build(); //создаём объект WebApplicati
 
 app.Run(sendForm);
 
-
-
 app.Run();
 
 async Task sendForm(HttpContext context)
